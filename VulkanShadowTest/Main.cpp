@@ -22,7 +22,8 @@ const std::vector<const char*> validationLayers = {
 };
 
 const std::vector<const char*> deviceExtensions = {
-    VK_KHR_SWAPCHAIN_EXTENSION_NAME
+    VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+
 };
 
 #ifdef NDEBUG
@@ -166,23 +167,23 @@ private:
     }
 
     void cleanup() {
-        cleanupSwapChain();
+        //cleanupSwapChain();
 
-        for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
-            vkDestroySemaphore(device, renderFinishedSemaphores[i], nullptr);
-            vkDestroySemaphore(device, imageAvailableSemaphores[i], nullptr);
-            vkDestroyFence(device, inFlightFences[i], nullptr);
-        }
+        //for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
+        //    vkDestroySemaphore(device, renderFinishedSemaphores[i], nullptr);
+        //    vkDestroySemaphore(device, imageAvailableSemaphores[i], nullptr);
+        //    vkDestroyFence(device, inFlightFences[i], nullptr);
+        //}
 
-        vkDestroyCommandPool(device, commandPool, nullptr);
+        //vkDestroyCommandPool(device, commandPool, nullptr);
 
-        vkDestroyDevice(device, nullptr);
+        //vkDestroyDevice(device, nullptr);
 
         if (enableValidationLayers) {
             DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
         }
 
-        vkDestroySurfaceKHR(instance, surface, nullptr);
+        //vkDestroySurfaceKHR(instance, surface, nullptr);
         vkDestroyInstance(instance, nullptr);
 
         glfwDestroyWindow(window);
@@ -269,7 +270,7 @@ private:
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
         createInfo = {};
         createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-        createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+        createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
         createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
         createInfo.pfnUserCallback = debugCallback;
     }
